@@ -1,30 +1,8 @@
 const mongoose = require('mongoose');
 const _ = require('underscore');
-const { finishPositionSchema } = require('./finishPosition');
+const { RaceSchema } = require('./Race.js');
 
 const setName = (name) => _.escape(name).trim();
-
-const RaceSchema = new mongoose.Schema({
-  raceNumber: {
-    type: Number,
-    min: 1,
-    required: true,
-  },
-  raceData: {
-    type: Date,
-    required: true,
-  },
-  finishPositions: [finishPositionSchema],
-  owner: {
-    type: mongoose.Schema.ObjectId,
-    required: true,
-    ref: 'Championship',
-  },
-  createdDate: {
-    type: Date,
-    default: Date.now,
-  },
-});
 
 const ChampionshipSchema = new mongoose.Schema({
   name: {
@@ -33,12 +11,12 @@ const ChampionshipSchema = new mongoose.Schema({
     trim: true,
     set: setName,
   },
+  races: [RaceSchema],
   owner: {
     type: mongoose.Schema.ObjectId,
     required: true,
     ref: 'Account',
   },
-  races: [RaceSchema],
   createdDate: {
     type: Date,
     default: Date.now,
@@ -47,6 +25,7 @@ const ChampionshipSchema = new mongoose.Schema({
 
 ChampionshipSchema.statics.toAPI = (doc) => ({
   name: doc.name,
+  races: doc.races,
 });
 
 const DomoModel = mongoose.model('Championship', ChampionshipSchema);
