@@ -28,5 +28,5 @@ ChampionshipSchema.statics.toAPI = (doc) => ({
   races: doc.races,
 });
 
-const DomoModel = mongoose.model('Championship', ChampionshipSchema);
-module.exports = DomoModel;
+const ChampionshipModel = mongoose.model('Championship', ChampionshipSchema);
+module.exports = ChampionshipModel;
