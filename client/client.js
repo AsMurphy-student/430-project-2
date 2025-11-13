@@ -113,6 +113,16 @@ const init = () => {
       return false;
     });
   }
+  
+  const addTestButtons = document.querySelectorAll('.championship button');
+  
+  addTestButtons.forEach((button) => {
+    const championshipName = button.id.split('-')[0];
+    
+    button.addEventListener('click', () => {
+      sendPost('/addRace', { name: championshipName });
+    });
+  });
 };
 
 // Call init when the window loads.

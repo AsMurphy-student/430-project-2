@@ -4,10 +4,24 @@ const { Championship } = models;
 
 const championshipsPage = async (req, res) => {
   try {
+    // console.log(req.session.account.championships);
     const query = { owner: req.session.account._id };
     const docs = await Championship.find(query).select('name').lean().exec();
 
     return res.render('championships', { championships: docs });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'Error retrieving championships!' });
+  }
+};
+
+const addRace = async (req, res) => {
+  try {
+    const query = { owner: req.session.account._id, name: req.body.name };
+    const docs = await Championship.find(query).select('name').lean().exec();
+
+    console.log(docs);
+    // return res.render('championships', { championships: docs });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: 'Error retrieving championships!' });
@@ -40,4 +54,5 @@ const makeChampionship = async (req, res) => {
 module.exports = {
   championshipsPage,
   makeChampionship,
+  addRace,
 };
