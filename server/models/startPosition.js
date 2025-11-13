@@ -10,9 +10,9 @@ const startPositionSchema = new mongoose.Schema({
     min: 0,
     required: true,
   },
-  lapsLed: {
-    type: Double,
-    min: 0.0,
+  speed: {
+    type: Number,
+    min: 0,
     required: true,
   },
   owner: {
