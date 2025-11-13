@@ -37,7 +37,7 @@ const finishPositionSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-});
+}, {autoCreate: false});
 
 const FinishPositionModel = mongoose.model('FinishPosition', finishPositionSchema);
 module.exports = {

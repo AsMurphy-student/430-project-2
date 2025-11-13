@@ -20,7 +20,7 @@ const sendPost = async (url, data) => {
   });
 
   const result = await response.json();
-  document.getElementById('domoMessage').classList.add('hidden');
+  // document.getElementById('domoMessage').classList.add('hidden');
 
   if(result.redirect) {
     window.location = result.redirect;
@@ -37,8 +37,8 @@ const sendPost = async (url, data) => {
 const init = () => {
   const signupForm = document.getElementById('signupForm');
   const loginForm = document.getElementById('loginForm');
-  const domoForm = document.getElementById('domoForm');
-  const domoMessage = document.getElementById('domoMessage');
+  const championshipForm = document.getElementById('championshipForm');
+  // const domoMessage = document.getElementById('domoMessage');
 
   /* If this page has the signupForm, add it's submit event listener.
      Event listener will grab the username, password, and password2
@@ -48,7 +48,7 @@ const init = () => {
   if(signupForm) {
     signupForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      domoMessage.classList.add('hidden');
+      // domoMessage.classList.add('hidden');
 
       const username = signupForm.querySelector('#user').value;
       const pass = signupForm.querySelector('#pass').value;
@@ -77,7 +77,7 @@ const init = () => {
   if(loginForm) {
     loginForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      domoMessage.classList.add('hidden');
+      // domoMessage.classList.add('hidden');
 
       const username = loginForm.querySelector('#user').value;
       const pass = loginForm.querySelector('#pass').value;
@@ -97,20 +97,19 @@ const init = () => {
      the form. It will throw an error if one or both are missing.
      Otherwise, it will send the request to the server.
   */
-  if(domoForm) {
-    domoForm.addEventListener('submit', (e) => {
+  if(championshipForm) {
+    championshipForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      domoMessage.classList.add('hidden');
+      // domoMessage.classList.add('hidden');
 
-      const name = domoForm.querySelector('#domoName').value;
-      const age = domoForm.querySelector('#domoAge').value;
+      const name = championshipForm.querySelector('#championshipName').value;
 
-      if(!name || !age) {
-        handleError('All fields are required!');
+      if(!name) {
+        // handleError('All fields are required!');
         return false;
       }
 
-      sendPost(domoForm.getAttribute('action'), {name, age});
+      sendPost(championshipForm.getAttribute('action'), {name});
       return false;
     });
   }

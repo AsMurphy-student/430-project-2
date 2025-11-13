@@ -24,7 +24,7 @@ const startPositionSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-});
+}, {autoCreate: false});
 
 const StartPositionModel = mongoose.model('StartPosition', startPositionSchema);
 module.exports = {

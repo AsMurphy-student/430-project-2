@@ -7,7 +7,7 @@ const championshipsPage = async (req, res) => {
     const query = { owner: req.session.account._id };
     const docs = await Championship.find(query).select('name').lean().exec();
 
-    return res.render('championshipsPage', { championships: docs });
+    return res.render('championships', { championships: docs });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: 'Error retrieving championships!' });

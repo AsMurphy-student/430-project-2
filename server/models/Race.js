@@ -26,7 +26,7 @@ const RaceSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-});
+}, {autoCreate: false});
 
 RaceSchema.statics.toAPI = (doc) => ({
   raceNumber: doc.raceNumber,
