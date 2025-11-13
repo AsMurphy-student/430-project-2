@@ -9,8 +9,8 @@ const router = (app) => {
 
   app.get('/logout', controllers.Account.logout);
 
-  app.get('/maker', controllers.Domo.makerPage);
-  app.post('/maker', controllers.Domo.makeDomo);
+  // app.get('/maker', controllers.Domo.makerPage);
+  // app.post('/maker', controllers.Domo.makeDomo);
 
   app.get('/championships', controllers.Championship.championshipsPage);
   app.post('/championships', controllers.Domo.makeChampionship);
