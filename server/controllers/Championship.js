@@ -17,13 +17,6 @@ const championshipsPage = async (req, res) => {
   }
 };
 
-function extractData(table) {
-  return Array.from(table).map((row) => {
-    const cells = row.cells;
-    return cells.map((cell) => cell.textContent.trim()).join(",");
-  });
-}
-
 const addRace = async (req, res) => {
   try {
     const query = { owner: req.session.account._id, name: req.body.name };
@@ -35,7 +28,23 @@ const addRace = async (req, res) => {
     // tables.forEach((table) => {
     //   console.log(table.outerHTML);
     // });
-    console.log(tables[4].outerHTML);
+    // console.log(tables[0].previousElementSibling.outerHTML);
+    
+    tables.forEach((table) => {
+      const prevSib = table.previousElementSibling.previousElementSibling;
+      const text = prevSib.innerHTML.trim();
+      if (text != "") {
+        console.log(text);
+      } else {
+        console.log(table.previousElementSibling.innerHTML.trim());
+      }
+    })
+    // if (prevSib && prevSib.tagName === "H3") {
+    //     console.log(prevSib.textContent);
+    //   } else if (prevSib && prevSib.childNodes.length > 0) {
+    //     const title = prevSib.firstChild;
+    //     console.log(title.textContent);
+    //   }
 
     // return res.render('championships', { championships: docs });
   } catch (err) {
