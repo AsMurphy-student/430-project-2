@@ -40,6 +40,7 @@ const createRaceModel = (htmlString, raceNumber) => {
   });
 
   newRace.startPositions = startsArray;
+  newRace.finishPositions = finishesArray;
   console.log(newRace);
 };
 
