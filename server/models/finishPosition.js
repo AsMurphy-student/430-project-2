@@ -28,11 +28,11 @@ const finishPositionSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  owner: {
-    type: mongoose.Schema.ObjectId,
-    required: true,
-    ref: 'Championship',
-  },
+  // owner: {
+  //   type: mongoose.Schema.ObjectId,
+  //   required: true,
+  //   ref: 'Championship',
+  // },
   createdDate: {
     type: Date,
     default: Date.now,

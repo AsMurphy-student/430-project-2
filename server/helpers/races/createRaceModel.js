@@ -1,6 +1,10 @@
 const { JSDOM } = require('jsdom');
-const { forEach } = require('underscore');
 const parseOtherSession = require('./parseOtherSession');
+const parseRaceSession = require('./parseRaceSession');
+
+const models = require('../../models');
+
+const { Race } = models;
 
 const getTableTitles = (tables) => {
   const tableNameArray = [];
@@ -16,17 +20,27 @@ const getTableTitles = (tables) => {
   return tableNameArray;
 };
 
-const createRaceModel = (htmlString) => {
+const createRaceModel = (htmlString, raceNumber) => {
   const domOfRace = new JSDOM(htmlString);
   const tables = domOfRace.window.document.querySelectorAll('table');
   const tableNames = getTableTitles(tables);
 
-  tables.forEach((table, index) => {
-    if (tableNames[index] === 'Session: Qualifying')
-      parseOtherSession(table);
-    else if (tableNames[index] === 'OFFICIAL STANDINGS')
-      parseRaceSession(table);
+  // console.log(Race.RaceSchema);
+
+  const newRace = new Race.RaceModel({
+    raceNumber,
   });
+
+  let startsArray = [];
+  let finishesArray = [];
+
+  tables.forEach((table, index) => {
+    if (tableNames[index] === 'Session: Qualifying') startsArray = parseOtherSession(table);
+    else if (tableNames[index] === 'OFFICIAL STANDINGS') finishesArray = parseRaceSession(table);
+  });
+
+  newRace.startPositions = startsArray;
+  console.log(newRace);
 };
 
 module.exports = createRaceModel;

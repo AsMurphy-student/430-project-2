@@ -1,6 +1,5 @@
-
 const parseRaceSession = (table) => {
-  console.log(table);
+  
 };
 
-
+module.exports = parseRaceSession;

@@ -17,11 +17,11 @@ const RaceSchema = new mongoose.Schema({
   // },
   startPositions: [startPositionSchema],
   finishPositions: [finishPositionSchema],
-  owner: {
-    type: mongoose.Schema.ObjectId,
-    required: true,
-    ref: 'Championship',
-  },
+  // owner: {
+  //   type: mongoose.Schema.ObjectId,
+  //   required: true,
+  //   ref: 'Championship',
+  // },
   createdDate: {
     type: Date,
     default: Date.now,

@@ -2,7 +2,6 @@ const fs = require('fs');
 const models = require('../models');
 const createRaceModel = require('../helpers/races/createRaceModel');
 
-
 const { Championship } = models;
 
 const championshipsPage = async (req, res) => {
@@ -21,13 +20,22 @@ const championshipsPage = async (req, res) => {
 const addRace = async (req, res) => {
   try {
     const query = { owner: req.session.account._id, name: req.body.name };
-    const championshipToAddTo = await Championship.find(query).select('name').lean().exec();
+    const championshipToAddTo = await Championship.find(query)
+      .select('name')
+      .lean()
+      .exec();
+
+    // console.log(championshipToAddTo[0].races);
+    let newRaceNumber = 0;
+    if (championshipToAddTo[0].races) {
+      newRaceNumber = championshipToAddTo[0].races.length + 1;
+    } else {
+      newRaceNumber = 1;
+    }
 
     const htmlContent = fs.readFileSync(`${__dirname}/race.html`, 'utf8');
 
-    createRaceModel(htmlContent);
-
-
+    createRaceModel(htmlContent, newRaceNumber);
 
     // if (prevSib && prevSib.tagName === "H3") {
     //     console.log(prevSib.textContent);
