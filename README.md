@@ -1,5 +1,7 @@
 # NASCAR Racing 2003 Points Site
 
+### Note: This site is no longer deployed, but can be run locally
+
 A comprehensive points tracking website for NASCAR Racing 2003, built using Handlebars, React, ExpressJS, and MongoDB.
 
 ### Overview
